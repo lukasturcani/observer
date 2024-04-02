@@ -1,0 +1,25 @@
+# For more information on this configuration, see the complete reference guide at
+# https://grafana.com/docs/tempo/latest/configuration/
+
+stream_over_http_enabled: true
+server:
+  http_listen_port: 3200
+
+# The distributor receives incoming trace span data for the system.
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:            # This example repository only utilises the OTLP gRPC receiver on port 4317.
+
+
+# Configuration block to determine where to store TSDB blocks.
+storage:
+  trace:
+    backend: local                     # Use the local filesystem for block storage. Not recommended for production systems.
+    # Write Ahead Log (WAL) configuration.
+    wal:
+      path: /tmp/tempo/wal             # Directory to store the the WAL locally.
+    # Local configuration for filesystem storage.
+    local:
+      path: /tmp/tempo/blocks          # Directory to store the TSDB blocks.
