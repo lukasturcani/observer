@@ -17,6 +17,13 @@ services:
       - "./tempo.yaml:/etc/tempo.yaml"
       - "./tempo-data:/tmp/tempo"
 
+  mimir:
+    image: grafana/mimir:latest
+    command: ["-ingester.native-histograms-ingestion-enabled=true", "-config.file=/etc/mimir.yaml"]
+    volumes:
+      - "./mimir.yaml:/etc/mimir.yaml"
+      - "./mimir-data:/tmp/mimir"
+
   grafana:
     image: grafana/grafana:latest
     volumes:
@@ -25,6 +32,6 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
-      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor traceQLStreaming metricsSummary
+      - GF_FEATURE_TOGGLES_ENABLE=flameGraph traceqlSearch traceQLStreaming correlations metricsSummary traceqlEditor traceToMetrics traceToProfiles
     ports:
       - "3000:3000"
