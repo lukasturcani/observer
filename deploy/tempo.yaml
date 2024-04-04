@@ -32,10 +32,8 @@ metrics_generator:
     span_metrics:
         # Configure extra dimensions to add as metric labels.
         dimensions:
-          - http.method
-          - http.target
-          - http.status_code
-          - service.version
+          - method
+          - uri
   # The registry configuration determines how to process metrics.
   registry:
     collection_interval: 5s                 # Create new metrics every 5s.
