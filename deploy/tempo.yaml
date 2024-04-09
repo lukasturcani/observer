@@ -34,6 +34,7 @@ metrics_generator:
         dimensions:
           - method
           - uri
+          - "service.version"
   # The registry configuration determines how to process metrics.
   registry:
     collection_interval: 5s                 # Create new metrics every 5s.
